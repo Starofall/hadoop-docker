@@ -7,14 +7,15 @@ MAINTAINER SequenceIQ
 
 USER root
 
-# fix dockerhub bug
-RUN touch /var/lib/rpm/*
+
 
 # install dev tools
 RUN yum clean all; \
     rpm --rebuilddb; \
     yum install -y curl which tar sudo openssh-server openssh-clients rsync
 # update libselinux. see https://github.com/sequenceiq/hadoop-docker/issues/14
+# fix dockerhub bug
+RUN touch /var/lib/rpm/*
 RUN yum update -y libselinux
 
 # passwordless ssh
